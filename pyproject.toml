@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "suzano-challenge"
+version = "0.1.0"
+description = "Suzano Pipeline"
+authors = ["Gabriel Candido"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+investpy = {git = "https://github.com/alvarobartt/investpy.git", rev = "master"}
+apache-airflow = "=2.7.2"
+apache-airflow-providers-cncf-kubernetes = "^9.0.0"
+apache-airflow-providers-google = "^9.0.0"
+trino = "=0.330.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+pytest-mock = "^3.7"
+pytest-cov = "^4.0"
+flake8 = "^5.0"
+mypy = "^0.990"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
