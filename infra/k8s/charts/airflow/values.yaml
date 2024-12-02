@@ -1,0 +1,108 @@
+uid: 50000
+gid: 0
+
+airflowHome: /opt/airflow
+
+nodeSelector:
+  nodegroupname: "nodegroupname"
+tolerations:
+ - key: "nodegroupname" 
+   operator: "Equal"  
+   value: "trino-node-pool"
+   effect: "NoSchedule"
+
+images:
+  airflow:
+    repository: gcr.io/suzano-challenge/airflow
+    tag: latest
+    pullPolicy: Always
+  gitSync:
+    repository: registry.k8s.io/git-sync/git-sync
+    tag: v4.3.0
+    pullPolicy: IfNotPresent\
+    
+ingress:
+  enabled: true
+  web:
+    enabled: true
+    annotations:
+      alb.ingress.kubernetes.io/backend-protocol: HTTPS
+      alb.ingress.kubernetes.io/listen-ports: '{"HTTPS": 443}, {"HTTP": 80}'
+    path: "/"
+    pathType: "ImplementationSpecific"
+    host: "suzano-airflow.prd.com.br"
+    ingressClassName: alb
+
+postgresql:
+  enabled: true
+
+scheduler:
+  enabled: true
+  securityContext:
+    runAsUser: 50000
+    fsGroup: 0
+    runAsGroup: 0
+  resources:
+    limits:
+     cpu: 1000m
+     memory: 1Gi
+    requests:
+     cpu: 400m
+     memory: 400Mi
+  waitForMigrations:
+    enabled: true
+
+workers:
+  enabled: true
+  securityContext:
+    runAsUser: 50000
+    fsGroup: 0
+    runAsGroup: 0
+
+webserver:
+  enabled: true
+  resources:
+    limits:
+     cpu: 800m
+     memory: 1Gi
+    requests:
+     cpu: 400m
+     memory: 500Mi
+  service:
+    type: NodePort
+  defaultUser:
+    enabled: true
+    role: Admin
+    username: admin
+    email: admin@example.com
+    firstName: admin
+    lastName: user
+    password: admin
+  waitForMigrations:
+    enabled: true
+
+triggerer:
+  enabled: true
+  resources:
+    limits:
+     cpu: 800m
+     memory: 1Gi
+    requests:
+     cpu: 400m
+     memory: 500Mi
+dags:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClassName: local-storage
+    accessMode: ReadWriteOnce
+    existingClaim: pv-airflow
+  gitSync:
+    enabled: false
+
+logs:
+  persistence:
+    enabled: true
+    size: 100Gi
+    storageClassName: local-storage
+    existingClaim: pv-logs

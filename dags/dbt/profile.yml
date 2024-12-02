@@ -1,0 +1,11 @@
+trino_connection:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      host: "suzano-trino.prd.com.br"
+      port: 8081
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      catalog: raw
+      schema: investing    

@@ -1,0 +1,14 @@
+name: suzano_challenge
+version: '1.0'
+
+config-version: 2
+
+profile: trino_profile
+models:
+  suzano_challenge:
+    +materialized: table
+    +schema: investing
+
+tests:
+  +enabled: true
+  +schema: investing

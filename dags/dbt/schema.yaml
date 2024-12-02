@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: chinese_caixin_services_index
+    schema: investing
+    columns:
+      - name: date
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['date']
+      - name: actual_state
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: close
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: forecast
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+
+  - name: bloomberg_commodity_index
+    schema: investing
+    columns:
+      - name: date
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['date']
+      - name: close
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: open
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: high
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: low
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: volume
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['int']
+
+  - name: usd_to_cny
+    schema: investing
+    columns:
+      - name: date
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['date']
+      - name: close
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: open
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: high
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: low
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['float']
+      - name: volume
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['int']

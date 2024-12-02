@@ -1,0 +1,29 @@
+rangerAdmin:
+  image:
+    repository: qnguyen3496/ranger-admin
+    tag: 3.0.0-SNAPSHOT
+    pullPolicy: IfNotPresent
+  installPropertiesSecret: ranger-admin-secret
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+    limits:
+      cpu: 4
+      memory: 16Gi
+service:
+  rangerAdmin:
+    type: ClusterIP
+    port: 6080
+ingress:
+  rangerAdmin:
+    enabled: true
+    className: alb
+    annotations:
+      alb.ingress.kubernetes.io/backend-protocol: HTTPS
+      alb.ingress.kubernetes.io/listen-ports: '{"HTTPS": 443}, {"HTTP": 80}'
+    hosts:
+      - host: "suzano-ranger.prd.com.br"
+        paths:
+          - path: /
+            pathType: Prefix
