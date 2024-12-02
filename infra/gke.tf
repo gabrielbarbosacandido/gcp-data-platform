@@ -84,6 +84,29 @@ module "gke" {
       gpu_sharing_strategy        = var.node_pool_grafana.gpu_sharing_strategy
       max_shared_clients_per_gpu = var.node_pool_grafana.max_shared_clients_per_gpu
     },
+    {
+      name                        = var.node_pool_ranger.name
+      machine_type                = var.node_pool_ranger.machine_type
+      node_locations              = var.node_pool_ranger.node_locations
+      min_count                   = var.node_pool_ranger.min_count
+      max_count                   = var.node_pool_ranger.max_count
+      disk_size_gb                = var.node_pool_ranger.disk_size_gb
+      disk_type                   = var.node_pool_ranger.disk_type
+      image_type                  = "COS_CONTAINERD"
+      enable_gcfs                 = false
+      enable_gvnic                = false
+      logging_variant             = "DEFAULT"
+      auto_repair                 = true
+      auto_upgrade                = true
+      service_account             = "project-service-account@${var.project_id}.iam.gserviceaccount.com"
+      preemptible                 = var.node_pool_ranger.preemptible
+      initial_node_count          = var.node_pool_ranger.initial_node_count
+      accelerator_count           = var.node_pool_ranger.accelerator_count
+      accelerator_type            = var.node_pool_ranger.accelerator_type
+      gpu_driver_version          = var.node_pool_ranger.gpu_driver_version
+      gpu_sharing_strategy        = var.node_pool_ranger.gpu_sharing_strategy
+      max_shared_clients_per_gpu = var.node_pool_ranger.max_shared_clients_per_gpu
+    }
   ]
 
   node_pools_oauth_scopes = var.node_pools_oauth_scopes
