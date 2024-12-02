@@ -240,6 +240,14 @@ variable dns_recordsets {
         "<IP_INGRESS_GATEWAY_TRINO>"
       ]
     }
+    {
+      name    = "suzano-grafana.prd.com.br"
+      type    = "A"
+      ttl     = 300
+      records = [
+        "<IP_INGRESS_GATEWAY_TRINO>"
+      ]
+    }
   ]
 }
 
@@ -334,6 +342,41 @@ variable node_pool_airflow {
   })
   default = {
     name               = "airflow-node-pool"
+    machine_type       = "e2-medium"
+    node_locations     = "us-central1-b,us-central1-c"
+    min_count          = 1
+    max_count          = 10
+    disk_size_gb       = 100
+    disk_type          = "pd-standard"
+    preemptible        = false
+    initial_node_count = 3
+    accelerator_count  = 0
+    accelerator_type   = "nvidia-l4"
+    gpu_driver_version = "LATEST"
+    gpu_sharing_strategy   = "TIME_SHARING"
+    max_shared_clients_per_gpu = 2
+  }
+}
+
+variable node_pool_ranger {
+  type = object({
+    name            = string
+    machine_type    = string
+    node_locations  = string
+    min_count       = number
+    max_count       = number
+    disk_size_gb    = number
+    disk_type       = string
+    preemptible     = bool
+    initial_node_count  = number
+    accelerator_count   = number
+    accelerator_type    = string
+    gpu_driver_version  = string
+    gpu_sharing_strategy = string
+    max_shared_clients_per_gpu = number
+  })
+  default = {
+    name               = "ranger-node-pool"
     machine_type       = "e2-medium"
     node_locations     = "us-central1-b,us-central1-c"
     min_count          = 1
