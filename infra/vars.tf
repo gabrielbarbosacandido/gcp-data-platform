@@ -251,6 +251,19 @@ variable dns_recordsets {
   ]
 }
 
+# GCR
+variable gcr_members {
+  type    = list(string)
+  default = [
+    "user:*.suzano.com.br",
+  ]
+}
+
+variable gcr_role {
+  type = string
+  default = "roles/storage.objectAdmin"
+}
+
 #GKE
 variable node_pool_trino {
   type = object({
@@ -321,7 +334,6 @@ variable node_pool_grafana {
     max_shared_clients_per_gpu = 2
   }
 }
-
 
 variable node_pool_airflow {
   type = object({

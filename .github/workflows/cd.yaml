@@ -1,0 +1,30 @@
+name: Build and Push Docker Images to GCR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Authenticate to Google Cloud
+        run: |
+          echo ${{ secrets.GCP_CREDENTIALS }} | gcloud auth activate-service-account --key-file=-
+          gcloud auth configure-docker
+      - name: Build and Push Airflow Image
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}airflow:latest .
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/airflow:latest
+      - name: Build and Push DBT image
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/dbt:latest ./dags/dbt/Dockerfile
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/dbt:latest
