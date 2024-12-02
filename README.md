@@ -11,6 +11,7 @@ This challenge involves building a data pipeline to extract financial data from 
 - **Catalog**: DBT
 - **Infrastructure**: Docker, Kubernetes, and Terraform (IAC)
 - **Data Security and Monitoring**: Apache Ranger
+- **Observability**: Grafana and Prometheus
 
 ## Repository Structure
 
@@ -33,5 +34,7 @@ The repository is structured as follows:
 - **Trino Helm Chart**: [https://github.com/trinodb/charts/blob/main/charts/trino/values.yaml](https://github.com/trinodb/charts/blob/main/charts/trino/values.yaml)
 - **Airflow Helm Chart**: [https://github.com/apache/airflow/blob/main/chart/values.yaml](https://github.com/apache/airflow/blob/main/chart/values.yaml)
 - **OpenSearch Helm Chart**: [https://github.com/opensearch-project/helm-charts/blob/main/charts/opensearch/values.yaml](https://github.com/opensearch-project/helm-charts/blob/main/charts/opensearch/values.yaml)
+- **Grafana Helm Chart**: [https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml](https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml)
+- **Prometheus Helm Chart**: [https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml](https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml)
 - **Apache Ranger Documentation**: [https://ranger.apache.org/](https://ranger.apache.org/)
 - **Istio Load Balancer**: [https://istio.io/](https://istio.io/)
