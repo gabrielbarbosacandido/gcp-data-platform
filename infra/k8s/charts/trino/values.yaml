@@ -236,3 +236,16 @@ worker:
   additionalConfigFiles:
     is_coordinator.txt: |
       false
+ingress:
+  enabled: true
+  web:
+    enabled: true
+    annotations:
+      alb.ingress.kubernetes.io/backend-protocol: HTTPS
+      alb.ingress.kubernetes.io/listen-ports: '{"HTTPS": 443}, {"HTTP": 80}'
+    path: "/"
+    pathType: "ImplementationSpecific"
+    host: "suzano-trino.prd.com.br"
+    ingressClassName: alb
+
+postgresql:
