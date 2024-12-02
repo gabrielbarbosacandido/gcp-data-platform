@@ -1,0 +1,40 @@
+name: CI - Run Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        export PATH="$HOME/.local/bin:$PATH"  # Adiciona Poetry ao PATH
+
+    - name: Install dependencies with Poetry
+      run: |
+        poetry install
+
+    - name: Run tests with unittest
+      run: |
+        export PYTHONPATH="dags"
+        poetry run python -m unittest discover -s tests -p "*.py"
+
+    - name: Upload test results
+      if: failure() 
+      uses: actions/upload-artifact@v2
+      with:
+        name: unittest-logs
+        path: unittest-report.xml 
