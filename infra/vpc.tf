@@ -7,17 +7,29 @@ module "vpc" {
   routing_mode = var.route_name
   subnets = [
     {
-      subnet_name           = var.subnet_a_name
-      subnet_ip             = var.subnet_a_ip
+      subnet_name           = var.private_subnet_a
+      subnet_ip             = var.private_subnet_a_ip
       subnet_region         = var.region
       subnet_private_access = tostring(var.subnet_private_access)
       subnet_flow_logs      = tostring(var.subnet_flow_logs)
     },
     {
-      subnet_name           = var.subnet_b_name
-      subnet_ip             = var.subnet_b_ip
+      subnet_name           = var.private_subnet_b
+      subnet_ip             = var.private_subnet_b_ip
       subnet_region         = var.region
       subnet_private_access = tostring(var.subnet_private_access)
+      subnet_flow_logs      = tostring(var.subnet_flow_logs)
+    },
+    {
+      subnet_name           = var.public_subnet_a
+      subnet_ip             = var.public_subnet_a_ip
+      subnet_region         = var.region
+      subnet_flow_logs      = tostring(var.subnet_flow_logs)
+    },
+    {
+      subnet_name           = var.publico_subnet_b
+      subnet_ip             = var.public_subnet_b_ip
+      subnet_region         = var.region
       subnet_flow_logs      = tostring(var.subnet_flow_logs)
     }
   ]

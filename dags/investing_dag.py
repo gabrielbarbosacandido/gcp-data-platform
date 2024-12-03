@@ -64,7 +64,7 @@ with DAG(
 
     quality_test_in_raw_tables = KubernetesPodOperator(
         namespace="airflow-prd",
-        image="gcr.io/suzano-challenge/airflow:latest",
+        image="gcr.io/suzano-challenge/dbt:latest",
         cmds=['/bin/bash', '-c', 'dbt run && dbt test'],
         task_id="quality_test_in_raw_tables",
         get_logs=True,

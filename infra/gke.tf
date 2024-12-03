@@ -3,11 +3,11 @@ module "gke" {
   project_id                 = var.project_id
   name                       = "${var.project_id}-gke"
   region                     = var.region
-  zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
+  zones                      = ["us-central1-a", "us-central1-b"]
   network                    = module.vpc.network_name
   subnetwork                 = module.vpc.subnets[0].subnet_name 
-  ip_range_pods              = module.vpc.secondary_ranges["subnet_a"][0].range_name
-  ip_range_services          = module.vpc.secondary_ranges["subnet_b"][0].range_name
+  ip_range_pods              = module.vpc.secondary_ranges["private_subnet_a"][0].range_name
+  ip_range_services          = module.vpc.secondary_ranges["private_subnet_b"][0].range_name
   http_load_balancing        = false
   network_policy             = false
   horizontal_pod_autoscaling = true

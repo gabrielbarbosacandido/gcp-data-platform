@@ -25,27 +25,57 @@ variable network_name {
   default = "suzano-challenge-vpc"
 }
 
-variable subnet_a_name {
+variable private_subnet_a {
   type    = string
-  default = "subnet_a"
+  default = "private_subnet_a"
 }
 
-variable subnet_b_name {
+variable private_subnet_b {
   type    = string
-  default = "subnet_b"
+  default = "private_subnet_b"
 }
 
-variable subnet_a_ip {
+variable public_subnet_a {
+  type    = string
+  default = "public_subnet_a"
+}
+
+variable public_subnet_b {
+  type    = string
+  default = "public_subnet_b"
+}
+
+variable "private_subnet_a_ip" {
   type    = string
   default = "10.10.10.0/24"
+  description = "IP range for the private subnet A."
 }
 
-variable subnet_b_ip {
+variable "private_subnet_b_ip" {
   type    = string
   default = "10.10.20.0/24"
+  description = "IP range for the private subnet B."
 }
 
-variable subnet_private_access {
+variable "subnet_private_access" {
+  type    = bool
+  default = true
+  description = "Whether the private subnets should have private Google access enabled."
+}
+
+variable "public_subnet_a_ip" {
+  type    = string
+  default = "10.10.30.0/24"
+  description = "IP range for the public subnet A."
+}
+
+variable "public_subnet_b_ip" {
+  type    = string
+  default = "10.10.40.0/24"
+  description = "IP range for the public subnet B."
+}
+
+variable public_private_access {
   type    = bool
   default = true
 }
@@ -61,13 +91,13 @@ variable secondary_ranges {
     ip_cidr_range = string
   })))
   default = {
-    subnet_a = [
+    private_subnet_a = [
       {
         range_name    = "gke-services"
         ip_cidr_range = "192.168.1.0/24"
       }
     ]
-    subnet_b = [
+    private_subnet_b = [
       {
         range_name    = "gke-pods"
         ip_cidr_range = "192.168.30.0/24"
